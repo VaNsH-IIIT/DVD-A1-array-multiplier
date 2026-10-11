@@ -56,3 +56,20 @@ gtkwave mult.vcd
 
 Example for task 5 uses Vansh's roll number (2024102013, last digit 3): A = 3 + 5 = 8, B = 7,
 P = 56. See `report/partA_hand_example.md` and `report/figures/partA_waveform.png`.
+
+## Part B: Logic synthesis with Yosys
+
+```bash
+# synthesis (writes synth/mult_array_netlist.v and synth/mult_array_stat.rpt)
+yosys -c synth/synth.tcl
+
+# gate-level simulation of the synthesized netlist with the same testbench
+CELLS=$PDK_ROOT/sky130A/libs.ref/sky130_fd_sc_hd/verilog
+iverilog -g2012 -DFUNCTIONAL -DUNIT_DELAY=#1 -o gls \
+  tb/tb_mult.v $CELLS/primitives.v $CELLS/sky130_fd_sc_hd.v synth/mult_array_netlist.v
+vvp gls
+#   -> PASS: 256 vectors checked, 0 errors
+```
+
+Result: 63 cells (16 x `dfrtp_1` + 47 logic), 740.71 um^2, flip-flops 54.05 % of the area.
+See `report/partB_results.md`.
