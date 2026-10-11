@@ -13,13 +13,12 @@ registered inputs and output (16 flip-flops, 2-cycle latency), SkyWater SKY130
 
 ## Progress and plan
 
-| Day | Date       | Work                                                         | Status |
-|-----|------------|--------------------------------------------------------------|--------|
-| 1   | 2026-10-11 | Setup, Part A (RTL, testbench, waveform, diagram), Part B    | Done   |
-| 2   |            | Part C: OpenSTA, Tmin / Fmax, critical path                  | Next   |
-| 3   |            | Part D: LibreLane RTL-to-GDS, DRC/LVS clean, KLayout shots   | To do  |
-| 4   |            | `report/report.pdf` (tables, figures, answers Q1-Q6)         | To do  |
-| 5   |            | Spare: fixes, final checklist (Section 11), viva preparation | To do  |
+| Day | Work                                                                      | Status |
+|-----|---------------------------------------------------------------------------|--------|
+| 1   | Setup, Part A (RTL, testbench, waveform, diagram), Part B (synthesis, GLS) | Done   |
+| 2   | Part C: OpenSTA at 10 ns and Tmin, Fmax, critical path analysis           | Next   |
+| 3   | Part D: LibreLane RTL-to-GDS, 0 DRC / 0 LVS / slack >= 0, KLayout shots   | To do  |
+| 4   | `report/report.pdf` (tables, figures, Q1-Q6), final checklist, merge      | To do  |
 
 ## Environment
 
