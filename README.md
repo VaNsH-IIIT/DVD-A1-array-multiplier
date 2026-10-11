@@ -1,0 +1,58 @@
+# 4-bit Array Multiplier: RTL to GDSII (SKY130, open-source flow)
+
+Digital VLSI Design assignment. Team **Madhurbala_riders** (sub-team of 2).
+
+| Name               | Roll number |
+|--------------------|-------------|
+| Vansh Jaiswal      | 2024102013  |
+| Saarthak Sabbarwal | 2023102055  |
+
+Design: 4-bit x 4-bit unsigned array multiplier (16 AND gates, 12 full adders),
+registered inputs and output (16 flip-flops, 2-cycle latency), SkyWater SKY130
+`sky130_fd_sc_hd` standard cells.
+
+## Environment
+
+All tools run inside the IIC-OSIC-TOOLS Docker image (`hpretl/iic-osic-tools:latest`,
+Icarus Verilog 14.0, Yosys 0.69, OpenSTA 3.1.0, LibreLane, OpenROAD, KLayout, Magic, Netgen).
+The container's default PDK is `ihp-sg13g2`, so SKY130 is selected explicitly.
+
+```bash
+# one-time: download the image
+docker pull hpretl/iic-osic-tools:latest
+
+# start a shell in the container with this repository mounted and SKY130 selected
+docker run -it --rm \
+    -e PDK=sky130A -e PDK_ROOT=/foss/pdks -e STD_CELL_LIBRARY=sky130_fd_sc_hd \
+    -v "$PWD":/foss/designs/DVD-A1 -w /foss/designs/DVD-A1 \
+    hpretl/iic-osic-tools:latest --skip bash
+
+# inside the container: check the tools
+iverilog -V | head -1
+yosys -V
+sta -version
+echo $PDK_ROOT $PDK          # /foss/pdks sky130A
+```
+
+All commands below are run from the repository root inside the container.
+
+## Part A: RTL design and verification
+
+```bash
+# RTL simulation (exhaustive, self-checking)
+iverilog -g2012 -o sim tb/tb_mult.v rtl/full_adder.v rtl/mult_array.v
+vvp sim
+#   -> PASS: 256 vectors checked, 0 errors
+
+# error-injection check: temporarily edit rtl/full_adder.v to  assign sum = a ^ b;
+iverilog -g2012 -o sim tb/tb_mult.v rtl/full_adder.v rtl/mult_array.v
+vvp sim
+#   -> FAIL: 256 vectors checked, 95 errors
+# then restore  assign sum = a ^ b ^ cin;  and re-run (PASS again)
+
+# waveform (run on the host)
+gtkwave mult.vcd
+```
+
+Example for task 5 uses Vansh's roll number (2024102013, last digit 3): A = 3 + 5 = 8, B = 7,
+P = 56. See `report/partA_hand_example.md` and `report/figures/partA_waveform.png`.

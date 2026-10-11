@@ -1,0 +1,10 @@
+# simulation outputs
+sim
+sim_fail
+gls
+*.vcd
+# local logs
+logs/
+# LibreLane run directories (very large)
+pnr/runs/
+RTL_to_GDS.pdf
