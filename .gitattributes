@@ -1,0 +1,12 @@
+# Keep LF line endings on every OS (the EDA tools run in a Linux container)
+* text=auto eol=lf
+*.v       text eol=lf
+*.tcl     text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.rpt     text eol=lf
+*.svg     text eol=lf
+# binary outputs
+*.png     binary
+*.pdf     binary
+*.gds     binary
