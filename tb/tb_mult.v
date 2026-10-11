@@ -1,7 +1,8 @@
 `timescale 1ns/1ps
 // Exhaustive self-checking testbench for mult_array.
 // Inputs are applied on the falling edge; the product is checked after
-// two rising edges (2-cycle latency: edge 1 -> input regs, edge 2 -> output reg).
+// two rising edges (2-cycle latency: edge 1 -> input regs, edge 2 -> output reg),
+// sampling 4 ns after edge 2 so gate-level flip-flop delays have settled.
 module tb_mult;
 
     reg        clk;
@@ -50,7 +51,7 @@ module tb_mult;
 
                 @(posedge clk);            // edge 1: a, b captured into input regs
                 @(posedge clk);            // edge 2: product captured into p
-                #1;
+                #4;                        // sample after clk-to-q (UNIT_DELAY in netlist sim)
 
                 vectors = vectors + 1;
                 if (p !== expected) begin
