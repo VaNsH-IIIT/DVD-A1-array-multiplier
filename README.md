@@ -82,3 +82,19 @@ vvp gls
 
 Result: 63 cells (16 x `dfrtp_1` + 47 logic), 740.71 um^2, flip-flops 54.05 % of the area.
 See `report/partB_results.md`.
+
+## Part C: Static timing analysis with OpenSTA
+
+```bash
+# 1st run at T = 10 ns to find the worst slack (WNS)
+T=10 sta sta/sta.tcl
+#   -> worst slack max 7.40   (7.396 ns in the report)
+# Tmin = 10 - 7.396 = 2.604 ns -> 2.60 ns;  Fmax = 1000 / 2.604 = 384.0 MHz
+
+# 2nd run at T = Tmin = 2.60 ns (the script default); writes sta/mult_array_timing.rpt
+sta sta/sta.tcl
+#   -> worst slack max -0.00  (-0.004 ns, i.e. ~0)
+```
+
+Critical path: `a_r[1]` register -> 8 logic cells (7 full-adder stages) -> `p[6]` register.
+The committed `sta/mult_array_timing.rpt` is the T = 2.60 ns run. See `report/partC_results.md`.
