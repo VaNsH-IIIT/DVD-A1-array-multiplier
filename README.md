@@ -98,3 +98,41 @@ sta sta/sta.tcl
 
 Critical path: `a_r[1]` register -> 8 logic cells (7 full-adder stages) -> `p[6]` register.
 The committed `sta/mult_array_timing.rpt` is the T = 2.60 ns run. See `report/partC_results.md`.
+
+## Part D: Physical design with LibreLane
+
+```bash
+# RTL-to-GDSII flow (the container's librelane wrapper adds --manual-pdk and uses $PDK_ROOT/sky130A)
+cd pnr
+librelane config.json
+cd ..
+
+# copy the final results of the passing run into pnr/
+cp pnr/runs/RUN_2026-10-14_17-38-20/final/metrics.json      pnr/metrics.json
+cp pnr/runs/RUN_2026-10-14_17-38-20/final/gds/mult_array.gds pnr/mult_array.gds
+
+# view the layout
+klayout pnr/mult_array.gds
+# screenshots (batch render, no GUI)
+klayout -zz -r report/figures/render_layout.py \
+    -rd gds=pnr/mult_array.gds -rd lyp=$PDK_ROOT/sky130A/libs.tech/klayout/tech/sky130A.lyp \
+    -rd out=report/figures/partD_layout -rd zx_=50 -rd zy_=74 -rd zw=34
+```
+
+### LibreLane run log
+
+Start: CLOCK_PERIOD = 1.2 x Tmin = 1.2 x 2.604 = 3.125 ns, rounded up to 3.5 ns. After each failing
+run, CLOCK_PERIOD in `pnr/config.json` was increased by 0.5 ns and `librelane config.json` was run again.
+
+| Run | Run directory                 | CLOCK_PERIOD (ns) | Worst setup slack (ns) | DRC | LVS | Result |
+|----:|-------------------------------|------------------:|-----------------------:|----:|----:|--------|
+| 1   | `RUN_2026-10-14_17-29-27`     | 3.5               | -2.132                 | 0   | 0   | FAIL: setup violation (ss corner) |
+| 2   | `RUN_2026-10-14_17-31-35`     | 4.0               | -1.632                 | 0   | 0   | FAIL: setup violation (ss corner) |
+| 3   | `RUN_2026-10-14_17-32-56`     | 4.5               | -1.142                 | 0   | 0   | FAIL: setup violation (ss corner) |
+| 4   | `RUN_2026-10-14_17-34-18`     | 5.0               | -0.642                 | 0   | 0   | FAIL: setup violation (ss corner) |
+| 5   | `RUN_2026-10-14_17-35-41`     | 5.5               | -0.142                 | 0   | 0   | FAIL: setup violation (ss corner) |
+| 6   | `RUN_2026-10-14_17-37-02`     | 6.0               | -0.064                 | 0   | 0   | FAIL: setup violation (ss corner) |
+| 7   | `RUN_2026-10-14_17-38-20`     | 6.5               | +0.085                 | 0   | 0   | PASS (final) |
+
+Final: 1901 cells, core area 17759.5 um^2, wirelength 2405 um, post-route Fmax = 1000 / (6.5 - 0.085)
+= 155.9 MHz. The `runs/` folder is not committed. See `report/partD_results.md`.
