@@ -11,6 +11,15 @@ Design: 4-bit x 4-bit unsigned array multiplier (16 AND gates, 12 full adders),
 registered inputs and output (16 flip-flops, 2-cycle latency), SkyWater SKY130
 `sky130_fd_sc_hd` standard cells.
 
+## Progress and plan
+
+| Day | Work                                                                      | Status |
+|-----|---------------------------------------------------------------------------|--------|
+| 1   | Setup, Part A (RTL, testbench, waveform, diagram), Part B (synthesis, GLS) | Done   |
+| 2   | Part C: OpenSTA at 10 ns and Tmin, Fmax, critical path analysis           | Done   |
+| 3   | Part D: LibreLane RTL-to-GDS, 0 DRC / 0 LVS / slack >= 0, KLayout shots   | Done   |
+| 4   | `report/report.pdf` (tables, figures, Q1-Q6), final checklist, merge      | Done   |
+
 ## Environment
 
 All tools run inside the IIC-OSIC-TOOLS Docker image (`hpretl/iic-osic-tools:latest`,
