@@ -139,14 +139,14 @@ Final: 1901 cells, core area 17759.5 um^2, wirelength 2405 um, post-route Fmax =
 
 ## Report
 
-`report/report.pdf` is built from `report/report.md` (with the figures in `report/figures/`) using the
-`pandoc/latex:3.6` Docker image. Run on the host, from the repository root:
+`report/report.pdf` is an IEEE conference-style report (`IEEEtran` class), compiled from
+`report/report.tex` with the figures in `report/figures/`. Compile with pdfLaTeX twice
+(e.g. on Overleaf with the default pdfLaTeX compiler, or locally from the `report/` folder):
 
 ```bash
-docker run --rm -u $(id -u):$(id -g) -e HOME=/tmp -v "$PWD":/data -w /data/report \
-    -v /usr/share/fonts/truetype/dejavu:/usr/share/fonts/dejavu:ro pandoc/latex:3.6 \
-    report.md -o report.pdf --pdf-engine=xelatex \
-    -V mainfont="DejaVu Serif" -V sansfont="DejaVu Sans" -V monofont="DejaVu Sans Mono"
+cd report
+pdflatex report.tex
+pdflatex report.tex
 ```
 
 The per-part notes `report/partA_hand_example.md` and `report/partB_results.md` to
