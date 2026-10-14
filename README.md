@@ -127,3 +127,18 @@ run, CLOCK_PERIOD in `pnr/config.json` was increased by 0.5 ns and `librelane co
 
 Final: 1901 cells, core area 17759.5 um^2, wirelength 2405 um, post-route Fmax = 1000 / (6.5 - 0.085)
 = 155.9 MHz. The `runs/` folder is not committed. See `report/partD_results.md`.
+
+## Report
+
+`report/report.pdf` is built from `report/report.md` (with the figures in `report/figures/`) using the
+`pandoc/latex:3.6` Docker image. Run on the host, from the repository root:
+
+```bash
+docker run --rm -u $(id -u):$(id -g) -e HOME=/tmp -v "$PWD":/data -w /data/report \
+    -v /usr/share/fonts/truetype/dejavu:/usr/share/fonts/dejavu:ro pandoc/latex:3.6 \
+    report.md -o report.pdf --pdf-engine=xelatex \
+    -V mainfont="DejaVu Serif" -V sansfont="DejaVu Sans" -V monofont="DejaVu Sans Mono"
+```
+
+The per-part notes `report/partA_hand_example.md` and `report/partB_results.md` to
+`report/partD_results.md` contain the full working behind each results table.
