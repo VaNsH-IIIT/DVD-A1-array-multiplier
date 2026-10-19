@@ -19,7 +19,7 @@
 \begin{document}
 
 \title{4-Bit Array Multiplier from RTL to GDSII\\ with Open-Source Tools\\
-\large Digital VLSI Design Assignment Report (Team Madhurbala\_riders)}
+\large Digital VLSI Design (M26EC2.408) Assignment Report (Team Madhurbala\_riders)}
 
 \author{\IEEEauthorblockN{Vansh Jaiswal}
 \IEEEauthorblockA{
@@ -177,7 +177,17 @@ FAIL: 256 vectors checked, 95 errors
 \end{footnotesize}
 The change was then undone. Only 95 of the 256 products fail, because the bug shows only when a carry-in
 of 1 actually reaches a full adder: products such as $x\times0$, $x\times1$ or $x\times2$ never create an
-internal carry. Only an exhaustive testbench is guaranteed to expose such a fault.
+internal carry. Only an exhaustive testbench is guaranteed to expose such a fault. Fig.~\ref{fig:termA}
+shows both runs in the terminal.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/partA_terminal.png}
+    \caption{Terminal output for Part~A: the RTL simulation prints \texttt{PASS: 256 vectors checked, 0 errors};
+    with \texttt{sum} changed to \texttt{a \^{} b} the same testbench prints \texttt{FAIL: 256 vectors checked,
+    95 errors}, after which the file is restored.}
+    \label{fig:termA}
+\end{figure*}
 
 \subsection{Hand-Worked Example}
 The example uses Vansh Jaiswal's roll number 2024102013 (last digit 3): $A = 3+5 = 8$, $B = 7$.
@@ -275,7 +285,17 @@ F_{max} &= 1000 / T_{min} = 384.0~\text{MHz}.
 \end{align}
 Rerunning at $T = 2.60$\,ns ($T_{min}$ rounded to 0.01\,ns) gives a slack of $-0.004$\,ns $\approx 0$, and
 2.61\,ns gives $+0.006$\,ns. With an ideal clock the path delay does not depend on $T$, so the slack is
-exactly $T - 2.604$\,ns.
+exactly $T - 2.604$\,ns. Fig.~\ref{fig:termBC} shows the gate-level simulation and both STA runs in the
+terminal.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/partBC_terminal.png}
+    \caption{Terminal output for Parts~B and~C: the gate-level netlist simulation passes all 256 vectors; OpenSTA
+    reports a worst slack of 7.40\,ns (7.396\,ns in the report) at $T = 10$\,ns, from \texttt{\_095\_}
+    (\texttt{a\_r[1]}) to \texttt{\_092\_} (\texttt{p[6]}), and $-0.00$\,ns at $T = T_{min} = 2.60$\,ns.}
+    \label{fig:termBC}
+\end{figure*}
 
 \begin{table}[H]
 \centering
