@@ -5,7 +5,7 @@ Digital VLSI Design assignment. Team **Madhurbala_riders** (sub-team of 2).
 | Name               | Roll number |
 |--------------------|-------------|
 | Vansh Jaiswal      | 2024102013  |
-| Saarthak Sabbarwal | 2023102055  |
+| Saarthak Sabharwal | 2023102055  |
 
 Design: 4-bit x 4-bit unsigned array multiplier (16 AND gates, 12 full adders),
 registered inputs and output (16 flip-flops, 2-cycle latency), SkyWater SKY130
