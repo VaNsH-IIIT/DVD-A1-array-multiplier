@@ -494,7 +494,8 @@ path uses only the carry or only the sum of each adder.
 
 \subsection{Q3: Flip-Flop Area}
 The flip-flops occupy $400.384/740.710 = $ \textbf{54.05\,\%} of the cell area, although they are only 16 of
-the 63 cells. A \cell{dfrtp_1} is a master--slave flip-flop with asynchronous reset; at 25.02\umsq\ it is the
+the 63 cells. A \cell{dfrtp_1} is a master--slave flip-flop with asynchronous reset, built from 28 transistors against 4 for a
+\cell{nand2_1}; at 25.02\umsq\ it is the
 largest cell in the design, about 6.7 times a \cell{nand2_1} (3.75\umsq) and larger than any combinational
 cell used (the largest is \cell{xor3_1} at 23.77\umsq). The design is also very small: the array has only
 28 AND/full-adder blocks, while registering both inputs and the output needs $4N = 16$ flip-flops. Registers
@@ -526,7 +527,7 @@ input and 8 output pins from the internal logic, and two fanout buffers split th
 
 \subsection{Q5: DRC and LVS}
 \emph{Design rule checking} (DRC) verifies that the layout geometry obeys the foundry's manufacturing rules:
-minimum widths and spacings of every layer, enclosures of contacts and vias, overlaps and densities.
+minimum widths and spacings of every layer, enclosures of contacts and vias, overlaps, densities and antenna rules.
 \emph{Layout versus schematic} (LVS) extracts the transistors and their connections from the layout and
 checks that they form exactly the same circuit as the gate-level netlist, with the same devices, nets and
 pins. A DRC violation means the chip may not be manufacturable or will suffer shorts and opens that lower
