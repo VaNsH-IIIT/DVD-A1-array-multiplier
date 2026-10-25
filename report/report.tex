@@ -565,9 +565,29 @@ The drop from 384.0\,MHz to 155.9\,MHz shows how strongly signoff conditions tha
 ignores (the slow process corner, interconnect parasitics, the real clock tree and clock uncertainty) limit
 the achievable clock frequency, and why post-layout analysis is essential in practical VLSI design.
 
+\section{Individual Contributions}
+The work was divided evenly between the two team members:
+\begin{itemize}\raggedright
+    \item \textbf{Vansh Jaiswal (2024102013):} Part~A (\texttt{full\_adder.v}, \texttt{mult\_array.v}, the
+          self-checking testbench and its sampling fix, the error-injection test, the hand-worked example and
+          the waveform figure) and Part~C (\texttt{sta.tcl}, $T_{min}$ and $F_{max}$, tracing the critical path
+          through the full-adder stages); answers to Q2 and Q6; the GitHub repository and the README command log.
+    \item \textbf{Saarthak Sabharwal (2023102055):} Part~B (\texttt{synth.tcl}, synthesis, gate-level
+          simulation and the cell/area table) and Part~D (\texttt{config.json}, the LibreLane runs, the
+          added-cell analysis, layout inspection in Magic and KLayout, DRC/LVS signoff and the layout figures);
+          the block diagram; answers to Q1, Q3, Q4 and Q5; review of the pull request.
+\end{itemize}
+Both members wrote the report and cross-checked each other's results. All commits were pushed from Vansh's
+GitHub account, so the commit history shows a single author.
+
 \section*{Acknowledgment}
 We thank the course instructor and the teaching assistants of Digital VLSI Design for their guidance, and
 the developers of the open-source EDA tools and the SkyWater PDK used in this work.
+
+\section*{Use of AI Tools}
+An AI assistant was used to support parts of this work. The team guided it throughout, reviewed and verified
+every step and result, and takes full responsibility for the submitted design and report, in line with the
+responsible use of AI.
 
 \begin{thebibliography}{00}
 \bibitem{weste}
