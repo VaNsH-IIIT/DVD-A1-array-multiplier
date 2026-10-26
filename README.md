@@ -64,7 +64,7 @@ gtkwave mult.vcd
 ```
 
 Example for task 5 uses Vansh's roll number (2024102013, last digit 3): A = 3 + 5 = 8, B = 7,
-P = 56. See `report/partA_hand_example.md` and `report/figures/partA_waveform.png`.
+P = 56. See `report/figures/partA_hand_example.jpg` and `report/figures/partA_waveform.png`.
 
 ## Part B: Logic synthesis with Yosys
 
@@ -81,7 +81,6 @@ vvp gls
 ```
 
 Result: 63 cells (16 x `dfrtp_1` + 47 logic), 740.71 um^2, flip-flops 54.05 % of the area.
-See `report/partB_results.md`.
 
 ## Part C: Static timing analysis with OpenSTA
 
@@ -97,7 +96,7 @@ sta sta/sta.tcl
 ```
 
 Critical path: `a_r[1]` register -> 8 logic cells (7 full-adder stages) -> `p[6]` register.
-The committed `sta/mult_array_timing.rpt` is the T = 2.60 ns run. See `report/partC_results.md`.
+The committed `sta/mult_array_timing.rpt` is the T = 2.60 ns run.
 
 ## Part D: Physical design with LibreLane
 
@@ -135,19 +134,9 @@ run, CLOCK_PERIOD in `pnr/config.json` was increased by 0.5 ns and `librelane co
 | 7   | `RUN_2026-10-14_17-38-20`     | 6.5               | +0.085                 | 0   | 0   | PASS (final) |
 
 Final: 1901 cells, core area 17759.5 um^2, wirelength 2405 um, post-route Fmax = 1000 / (6.5 - 0.085)
-= 155.9 MHz. The `runs/` folder is not committed. See `report/partD_results.md`.
+= 155.9 MHz. The `runs/` folder is not committed.
 
 ## Report
 
-`report/report.pdf` is an IEEE conference-style report (`IEEEtran` class), compiled from
-`report/report.tex` with the figures in `report/figures/`. Compile with pdfLaTeX twice
-(e.g. on Overleaf with the default pdfLaTeX compiler, or locally from the `report/` folder):
-
-```bash
-cd report
-pdflatex report.tex
-pdflatex report.tex
-```
-
-The per-part notes `report/partA_hand_example.md` and `report/partB_results.md` to
-`report/partD_results.md` contain the full working behind each results table.
+`report/report.pdf` is the final report, with all results tables, figures and the answers to
+questions 1-6. The figures used in it are in `report/figures/`.

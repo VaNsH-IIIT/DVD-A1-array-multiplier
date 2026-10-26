@@ -8,3 +8,6 @@ logs/
 # LibreLane run directories (very large)
 pnr/runs/
 RTL_to_GDS.pdf
+# report sources (kept locally, only report.pdf and figures/ are submitted)
+report/report.tex
+report/part*.md
